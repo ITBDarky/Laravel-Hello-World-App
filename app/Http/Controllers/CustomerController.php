@@ -12,9 +12,10 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::where('active',1)->get();
+        $customers = Customer::where('active', $request->query('active', 1))->get();
+
         return view('customer.index', compact('customers'));
     }
 
@@ -36,8 +37,6 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $this->validateData($request);
-
         Customer::create($this->validateData($request));
 
         return redirect('/customers');
