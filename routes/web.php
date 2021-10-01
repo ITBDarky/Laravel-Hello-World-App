@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CustomerController;
-use App\Models\Customer;
-use Symfony\Component\Routing\Router;
+use App\Mail\WelcomeMail;
+// use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +36,10 @@ Route::get('customers/{customer}', [CustomerController::class, 'show']);
 Route::get('customers/{customer}/edit', [CustomerController::class, 'edit']);
 Route::put('customers/{customer}', [CustomerController::class, 'update']);
 Route::delete('customers/{customer}', [CustomerController::class, 'destroy']);
+
+Route::get('email', function() {
+    // Sample for sending email
+    // Mail::to('email@mail.com')->send(new WelcomeMail());
+
+    return new WelcomeMail();
+});
